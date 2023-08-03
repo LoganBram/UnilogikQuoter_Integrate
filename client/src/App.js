@@ -4,6 +4,8 @@ import "./App.css";
 import "react-dropdown/style.css";
 //imports redirect method from backend to begin oauth workflow
 
+let finaldata = [];
+
 function FileProcessor() {
   const options = [
     {
@@ -70,7 +72,7 @@ function FileProcessor() {
       }
 
       //once you have the column count transfer the information to template excel sheet
-      let finaldata = [];
+
       let tempdata = [];
 
       //first loop to access a row, starts at two to start at data rows not headers in excel sheet
@@ -166,12 +168,14 @@ function FileProcessor() {
     };
 
     reader.readAsArrayBuffer(file);
+    //set timeout to allow time for the file to download
+    //CHANGE THIS TO AWAIT FUNCTION LATER
     setTimeout(() => {
-      const gradesarray = [1, 2, 3, 4];
-      const grs = gradesarray.join(",");
+      const skuarray = finaldata.map((subarray) => subarray[1]);
+      const grs = skuarray.join(",");
       // Run the redirect function to begin OAuth functionality
       window.location.href = `http://localhost:3000/?array=${grs}`;
-    }, 1000);
+    }, 20000);
   };
 
   return (
