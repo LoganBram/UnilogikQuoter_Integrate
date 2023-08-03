@@ -174,8 +174,8 @@ function FileProcessor() {
       const skuarray = finaldata.map((subarray) => subarray[1]);
       const grs = skuarray.join(",");
       // Run the redirect function to begin OAuth functionality
-      window.location.href = `http://localhost:3000/?array=${grs}`;
-    }, 20000);
+      window.location.href = `http://localhost:3000/oauthtrigg/?array=${grs}`;
+    }, 5000);
   };
 
   return (
