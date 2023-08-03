@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ExcelJS from "exceljs";
 import "./App.css";
-
 import "react-dropdown/style.css";
+//imports redirect method from backend to begin oauth workflow
 
 function FileProcessor() {
   const options = [
@@ -166,6 +166,12 @@ function FileProcessor() {
     };
 
     reader.readAsArrayBuffer(file);
+    setTimeout(() => {
+      const gradesarray = [1, 2, 3, 4];
+      const grs = gradesarray.join(",");
+      // Run the redirect function to begin OAuth functionality
+      window.location.href = `http://localhost:3000/?array=${grs}`;
+    }, 1000);
   };
 
   return (
@@ -301,11 +307,9 @@ function InvoiceToDisplay({ handleInvoiceToChange, handleDropdown, chosen }) {
 }
 
 function EmployeeDropdown({ handleDropdown, chosen }) {
-
   //value tells what index of the options array to use
   return (
     <select onChange={handleDropdown} defaultValue={chosen}>
-    
       <option name="ryan" value="0">
         ryan
       </option>
@@ -315,4 +319,5 @@ function EmployeeDropdown({ handleDropdown, chosen }) {
     </select>
   );
 }
+
 export default FileProcessor;
