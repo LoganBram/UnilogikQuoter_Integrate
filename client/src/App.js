@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ExcelJS from "exceljs";
 import "./App.css";
 import "react-dropdown/style.css";
+import axios from "axios";
 //imports redirect method from backend to begin oauth workflow
 
 let finaldata = [];
@@ -165,11 +166,16 @@ function FileProcessor() {
       downloadLink.download = "processed_file.xlsx";
       downloadLink.click();
       downloadLink.remove();
-    };
+
+    
 
     reader.readAsArrayBuffer(file);
     //set timeout to allow time for the file to download
     //CHANGE THIS TO AWAIT FUNCTION LATER
+
+    //trying post request to pass data instead of in the url, not sure
+    //if it will work
+
     setTimeout(() => {
       const skuarray = finaldata.map((subarray) => subarray[1]);
       const grs = skuarray.join(",");
